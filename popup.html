@@ -1,0 +1,27 @@
+<!doctype html>
+<html>
+<head>
+    <title>Stylizr</title> 
+    <style>
+        body {
+            font-family: sans-serif;
+            width: 300px;
+        }
+        .hidden {
+            display: none;
+        }
+    </style> 
+</head>
+<body>
+    <button id="settingButton">Setting</button>
+    <div id="configForm" class="hidden">
+        <h3>Configure the Chevereto URL</h3>
+        <label for="cheveretoUrl">Chevereto URL: </label>
+        <span>http://</span>
+        <input type="text" id="cheveretoUrlInput" value="localhost">
+        <button id="saveButton">Save</button>
+    </div>
+    <button id="trigger">Log</button>
+    <script src="popup.js"></script>
+</body>
+</html>

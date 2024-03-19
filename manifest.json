@@ -1,0 +1,46 @@
+{
+    "name": "CSCI4140 Assignment 2",
+    "version": "1.0",
+    "manifest_version": 3,
+    "description": "CSCI4140 Assignment 2",
+    "permissions": [
+        "storage",
+        "activeTab",
+        "tabs",
+        "contextMenus"
+    ],
+    "icons": {
+        "128": "csci4140asg2_icon.png",
+        "16": "csci4140asg2_icon.png"
+    },
+    "background": {
+        "service_worker": "service_worker.js"
+    },
+    "options_page": "options.html",
+    "content_scripts": [
+        {
+            "matches": ["*://*/*"], 
+            "js": ["content.js"]
+        }
+    ],
+    "action": {
+        "default_title": "CSCI4140 Assignment 2",
+        "default_popup": "popup.html",
+        "default_icon": "csci4140asg2_icon.png"
+    },
+    "web_accessible_resources": [
+        {
+            "resources": [
+                "myscript.js",
+                "caman.full.js",
+                "jquery-3.3.1.js",
+                "content.js",
+                "csci4140asg2_icon.png"
+            ],
+            "matches": [
+                "*://*/*"
+            ],
+            "extension_ids": []
+        }
+    ]
+}
