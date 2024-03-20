@@ -20,7 +20,7 @@
     "content_scripts": [
         {
             "matches": ["*://*/*"], 
-            "js": ["content.js"]
+            "js": ["jquery-3.3.1.js", "content.js"]
         }
     ],
     "action": {
