@@ -1,2 +1,26 @@
-<button>DOne</button>
-<button>Cancel</button>
+<div style="display: flex; flex-direction:column; align-items: center; width: 100vw; height: 100vh; z-index: 999;">
+    <h1 style="margin-bottom: 1rem;">CamanJS Editor</h1>
+    <img src="#a" alt="" style="height: 300px; width: 500px; margin-bottom: 1rem;">
+    <div style="margin-bottom: 1rem;">
+        <div>
+            <label for="brightness">Brightness</label>
+            <input type="range" min="1" max="100" value="50" id="brightness">
+        </div>
+        <div>
+            <label for="contrast">Contrast</label>
+            <input type="range" min="1" max="100" value="50" id="contrast">
+        </div>
+        <div>
+            <label for="sharpen">Sharpen</label>
+            <input type="range" min="1" max="100" value="50" id="sharpen">
+        </div>
+    </div>
+    <div style="margin-bottom: 1rem;">
+        <button>Original</button>
+        <button>Done</button>
+        <button>Cancel</button>
+    </div>
+    <button style="background-color: greenyellow; width: 100px; height: 30px;">
+        Upload
+    </button>
+</div>
