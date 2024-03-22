@@ -20,7 +20,8 @@ chrome.runtime.onMessage.addListener(async (request, sender, sendResponse)  => {
 
     addSubmitBtn()
     await timeout(2000)
-    // document.querySelector('canvas').id = "canvas"
+
+    injectScript('filter-actions.js')
 });
 
 // var inject =  chrome.runtime.getURL('script.js');
@@ -41,21 +42,53 @@ function addSubmitBtn() {
                 id="editBtn"
             >
                 Edit with CamanJS
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M15.182 15.182a4.5 4.5 0 0 1-6.364 0M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0ZM9.75 9.75c0 .414-.168.75-.375.75S9 10.164 9 9.75 9.168 9 9.375 9s.375.336.375.75Zm-.375 0h.008v.015h-.008V9.75Zm5.625 0c0 .414-.168.75-.375.75s-.375-.336-.375-.75.168-.75.375-.75.375.336.375.75Zm-.375 0h.008v.015h-.008V9.75Z" />
+                </svg>
             </button>
         </div>
     `
 
+    var injectEditPageScript = `
+    <div id='apply-filter-section' style="display: none; flex-direction:column; align-items: center; width: 100vw; height: 100vh; z-index: 999; position: fixed; top: 0; left: 0; background-color: #FFF">
+        <h1 style="margin-bottom: 1rem; margin-top: 1rem;">CamanJS Editor</h1>
+        <canvas id="edit-dummy-canva" class="canvas" style="display: block; width: 600px; height: 400px"></canvas>
+        <div style="margin-bottom: 1rem; margin-top: 1rem">
+            <div style="margin-bottom: 12px">
+                <label for="brightness">Brightness</label>
+                <input type="range" min="1" max="100" value="50" id="brightness">
+            </div>
+            <div style="margin-bottom: 12px">
+                <label for="contrast">Contrast</label>
+                <input type="range" min="1" max="100" value="50" id="contrast">
+            </div>
+            <div style="margin-bottom: 12px">
+                <label for="sharpen">Saturation</label>
+                <input type="range" min="1" max="100" value="50" id="saturation">
+            </div>
+        </div>
+        <div style="margin-bottom: 1rem;">
+            <button id="filter-origin-Btn" style="cursor: pointer; width: 80px; height:30px; border-radius: 8px">Original</button>
+            <button id="filter-done-Btn" style="cursor: pointer; width: 80px; height:30px; border-radius: 8px">Done</button>
+            <button id="filter-cancel-Btn" style="cursor: pointer; width: 80px; height:30px; border-radius: 8px">Cancel</button>
+        </div>
+    </div>`;
+
     var uploadBoxInner = $(".upload-box-inner")[0];
     if (uploadBoxInner) {
         $(uploadBoxInner).append(editBtn);
+        $("body").append(injectEditPageScript);
     }
 
     document.querySelector("#editBtn").addEventListener('click', function() {
-        modifyImage()
+        // modifyImage()
+
+        document.getElementById('apply-filter-section').style.display = 'flex';
+
         // var injectEditPageScript = `
         // <div style="display: flex; flex-direction:column; align-items: center; width: 100vw; height: 100vh; z-index: 999; position: fixed; top: 0; left: 0; background-color: #FFF">
         //     <h1 style="margin-bottom: 1rem; margin-top: 1rem;">CamanJS Editor</h1>
-        //     <img src="#a" alt="" style="height: 300px; width: 500px; margin-bottom: 1rem;">
+        //     <canvas id="edit-dummy-canva" width="590" height="331" class="canvas" style="display: block; height: 110px; width: 196.073px; margin-top: -55px; margin-left: -98px;"></canvas>
         //     <div style="margin-bottom: 1rem;">
         //         <div style="margin-bottom: 12px">
         //             <label for="brightness">Brightness</label>
@@ -80,36 +113,17 @@ function addSubmitBtn() {
         //     </button>
         // </div>`;
         // $("body").append(injectEditPageScript);
+
+
+        // function injectScript(script) {
+        //     var inject = chrome.runtime.getURL(script);
+        //     var injectScript = $("<script>", {
+        //         "src": inject
+        //     });
+        //     $("body").append(injectScript);
+        // }
+        // injectScript('filter-actions.js')
     })
-}
-
-// document.querySelector("#anywhere-upload-queue > li > div.preview.block > canvas")
-
-function modifyImage() {
-    console.log('inside modifyImage');
-
-    const canvas = document.querySelector("#anywhere-upload-queue > li > div.preview.block > canvas");
-
-    if (!canvas) {
-        console.log('Canvas element not found.');
-        return;
-    }
-
-    var img = new Image();
-    img.src = 'https://www.simplilearn.com/ice9/free_resources_article_thumb/what_is_image_Processing.jpg';
-    img.crossOrigin = "Anonymous";
-    img.id = "imggg";
-
-    img.onload = function() {
-        var imggg = document.getElementById('imggg');
-        console.log('imggg: ', imggg);
-        Caman(imggg, function () {  
-            // this.brightness(30).render();
-            this.contrast(-20).render(); 
-        });
-    };
-
-    document.body.appendChild(img)
 }
 
 

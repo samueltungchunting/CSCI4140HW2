@@ -12,6 +12,8 @@ async function fetchStorageValue() {
 }
 fetchStorageValue()
 
+const storage = chrome.storage.local;
+
 chrome.runtime.onInstalled.addListener(function() {
     let contextTypes = [
         'page',
@@ -63,9 +65,14 @@ function genericOnClick(info) {
         console.log('Checkbox item clicked. Status:', info.checked);
         break;
     case 'Upload-to-Chevereto':
-        if (storageValue.cheveretoUrl === 'localhost') {
-            openNewTab('http://localhost:8810/upload', info.srcUrl)
+        const storagee = chrome.storage.local;
+
+        async function getStorageValue() {
+            value = await storagee.get('cheveretoUrl');
+            console.log('Value: ', value.cheveretoUrl);
+            openNewTab(`http://${value.cheveretoUrl}/upload`, info.srcUrl)
         }
+        getStorageValue();
         break;
     default:
         console.log('Standard context menu item clicked.', info.srcUrl);

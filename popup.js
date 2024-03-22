@@ -32,8 +32,8 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    const trigger = document.getElementById('trigger');
-    trigger.addEventListener('click', function() {
-        getStorageValue();
-    });
+    // const trigger = document.getElementById('trigger');
+    // trigger.addEventListener('click', function() {
+    //     getStorageValue();
+    // });
 });
